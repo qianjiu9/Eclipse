@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>添加图书类别</title>
+<style>
+body {
+	margin: 0px;
+	padding: 0px;
+}
+
+input {
+	height: 20px;
+	boeder: solid #fafafa 0.5px;
+	height-line: 20px;
+}
+
+p {
+	text-align: center;
+	letter-spacing: 3px;
+	font-size: 20px;
+	color: #1d96e8;
+}
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<header th:replace="@{/common}::header"></header>
+
+	<p>请填写图书类别信息!</p>
+	<form method="post" th:action="@{/type/type}"
+		style="width: 600px; margin: auto; text-align: center;">
+		<ul
+			style="border: solid 2px #d0dfef; border-radius: 5px; width: 80%; list-style: none; margin: auto;">
+			<li><input type="hidden" name="id" th:value="${type?.id}"></li>
+			<br>
+			<br>
+			<li>类别缩写：<input type="text" name="abbr" th:value="${type?.abbr}"
+				style="width: 60%;"></li>
+			<br>
+			<li>类别名称：<input type="text" name="name" th:value="${type?.name}"
+				style="width: 60%;"></li>
+			<br>
+			<li>类别描述：<input type="text" name="desc" th:value=${type?.desc}
+				style="width: 60%;"></li>
+			<br>
+			<li><input type="submit" value="提交" style="width: 50px;"></li>
+			<br>
+		</ul>
+	</form>
+
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>图书管理系统</title>
+<script type="text/javascript">
+	window.onload = function() {
+
+		var list = document.getElementById('list');
+		var prev = document.getElementById('prev');
+		var next = document.getElementById('next');
+
+		function animate(offset) {
+			//获取的是style.left，是相对左边获取距离，所以第一张图后style.left都为负值，
+			//且style.left获取的是字符串，需要用parseInt()取整转化为数字。
+			var newLeft = parseInt(list.style.left) + offset;
+			list.style.left = newLeft + 'px';
+			if (newLeft < -4096) {
+				list.style.left = -1024 + 'px';
+			} else if (newLeft > -1024) {
+				list.style.left = -4096 + 'px';
+			}
+
+		}
+
+		prev.onclick = function() {
+			animate(1024);
+		}
+		next.onclick = function() {
+			animate(-1024);
+
+		}
+
+		var timer;
+		function play() {
+			timer = setInterval(function() {
+				next.onclick();
+			}, 3000);
+			//	console.log("111");
+		}
+
+		play();
+
+		function stop() {
+			clearInterval(timer);
+		}
+
+		var container = document.getElementById("container");
+		container.onmouseout = play;
+		container.onmouseover = stop;
+	}
+</script>
+<style type="text/css">
+#list img {
+	float: left;
+	width: 1024px;
+	height: 380px;
+}
+
+.arrow {
+	position: absolute;
+	top: 180px;
+	z-index: 2;
+	display: none;
+	width: 40px;
+	height: 40px;
+	font-size: 36px;
+	font-weight: bold;
+	line-height: 39px;
+	text-align: center;
+	color: #fff;
+	background-color: RGBA(0, 0, 0, .3);
+	cursor: pointer;
+}
+
+h1 {
+	margin: 0px;
+	padding: 15px 0px 15px 0px;
+	text-align: center;
+	color: #AEC7E1;
+}
+
+.arrow:hover {
+	background-color: RGBA(0, 0, 0, .7);
+}
+
+#container:hover .arrow {
+	display: block;
+}
+
+#prev {
+	left: 20px;
+}
+
+#next {
+	right: 20px;
+}
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body style="width: 1024px; margin: auto;">
+	<header th:replace="@{/common}::header"></header>
+	<h1>欢迎使用图书管理系统</h1>
+
+
+	<div id="container"
+		style="position: relative; width: 1024px; height: 380px; overflow: hidden; margin: auto;">
+		<div id="list"
+			style="position: absolute; z-index: 1; width: 5120px; height: 380px; left: -1024px;">
+			<img src="images/picture4.jpg" alt="3" /> <img
+				src="images/picture1.jpg" alt="1" /> <img src="images/picture2.jpg"
+				alt="2" /> <img src="images/picture3.jpg" alt="3" /> <img
+				src="images/picture4.jpg" alt="3" /> <img src="images/picture1.jpg"
+				alt="1" />
+		</div>
+		<a href="javascript:;" id="prev" class="arrow">&lt;</a> <a
+			href="javascript:;" id="next" class="arrow">&gt;</a>
+	</div>
+
+	<div style="height: 200px">
+		今天是<span th:text="${today}" style="color: red;">2017.11.11</span>
+
+	</div>
+	<footer th:replace="@{/common}::footer"></footer>
+</body>
+</html>

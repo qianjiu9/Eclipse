@@ -1,0 +1,69 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>图书信息</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body style="margin: 0px; padding: 0px;">
+	<header th:replace="@{/common}::header"></header>
+
+
+	<p style="color: #b4cde6; text-align: center; font-size: 3em;">
+		<b>welcome to book's Page</b>
+	</p>
+
+	<div>
+
+		<form th:action="@{/book/}" method="get"
+			style="width: 400px; margin: auto;" name="form">
+			<label for="type" style="font-size: 1em">请选择图书类别：</label> 
+			<select
+				id='select' name="typeId"
+				style="border: #f2f2f2 boild 2px; height: 30px; background-color: #c7cbd1; border-radius: 5px; width: 140px;">
+                <option value="-1" >全部</option>
+				<option th:each="type:${types}" th:value="${type.id}"
+					th:text="${type.name}" th:selected="(*{type?.id}==${type.id})">计算机科学与技术学院</option>
+				
+
+			</select> 
+			<input value="提交查询" type="submit" />
+		</form>
+
+	</div>
+	<br>
+	<table border="1" cellspacing='0'
+		style="text-align: center; width: 80%; margin: auto;">
+		<tr bgcolor=#f2f2f2>
+			<th>#</th>
+			<th>缩写</th>
+			<th>书名</th>
+			<th>作者</th>
+			<th>简介</th>
+			<th>类别</th>
+			<th>数量</th>
+			<th>操作</th>
+		</tr>
+
+		<tr th:each="book,rowStat:${book}">
+			<td th:text="${rowStat.count}">1</td>
+			<td th:text="${book.abbr}">1</td>
+			<td th:text="${book.name}">1</td>
+			<td th:text="${book.writ}">1</td>
+			<td th:text="${book.desc}">1</td>
+			<td th:text="${book.type?.name}">1</td>
+			<td th:text="${book.count}">1</td>
+			<td><a th:href="@{/book/delBook(id=${book.id})}">删除</a> <a
+				th:href="@{/book/form(id=${book.id})}">修改</a></td>
+		</tr>
+	</table>
+	<br>
+	<div
+		style="border-radius: 5px; width: 100px; margin: auto; border: solid 2px #a4a5a7; text-align: center; background-color: #f2f2f2;">
+		<a th:href="@{/book/form}" style="text-decoration: none;">添加图书</a>
+	</div>
+	
+
+	<footer></footer>
+</body>
+</html>

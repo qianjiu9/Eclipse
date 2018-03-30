@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>添加图书</title>
+<style>
+body {
+	margin: 0px;
+	padding: 0px;
+}
+
+input {
+	height: 20px;
+	boeder: solid #fafafa 0.5px;
+	height-line: 20px;
+}
+
+p {
+	text-align: center;
+	letter-spacing: 3px;
+	font-size: 20px;
+	color: #1d96e8;
+}
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<header th:replace="@{/common}::header"></header>
+
+	<p>请填写图书信息!</p>
+	<form method="post" th:object="${book}" th:action="@{/book/save}"
+		style="width: 600px; margin: auto; text-align: center; margin-top: 20px;">
+		<ul
+			style="border: solid 2px #d0dfef; border-radius: 5px; width: 80%; list-style: none; margin: auto;">
+			<li><input type="hidden" name="id" th:value="${book?.id}"></li>
+			<br>
+			<br>
+			<li>类别： <select name="type"
+				style="border: #fafafa boild 0.5px; height: 25px; background-color: #f3f3f3; border-radius: 5px; width: 60%;">
+
+					<option th:each="type:${type}" th:value="${type.id}"
+						th:text="${type.name}" th:selected="(*{type?.id}==${type.id})">1</option>
+			</select>
+			</li>
+			<br>
+			<li>缩写：<input type="text" name="abbr" th:value="${book?.abbr}"
+				style="width: 60%;"></li>
+			<br>
+			<li>书名：<input type="text" name="name" th:value="${book?.name}"
+				style="width: 60%;"></li>
+			<br>
+			<li>作者：<input type="text" name="writ" th:value="${book?.writ}"
+				style="width: 60%;"></li>
+			<br>
+			<li>简介：<input type="text" name="desc" th:value="${book?.desc}"
+				style="width: 60%;"></li>
+			<br>
+			<li>数量：<input type="text" name="count" th:value="${book?.count}"
+			    style="width:60%;"></li>
+			 <br>
+			<li><input type="submit" value="提交" style="width: 50px;"></li>
+			<br>
+		</ul>
+	</form>
+
+</body>
+</html>

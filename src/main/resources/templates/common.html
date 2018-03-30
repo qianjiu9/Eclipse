@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>共用部件</title>
+<style>
+body {
+	width: 100%;
+	margin: 0px;
+}
+
+.common_head {
+	width: 100%;
+	height: 50px;
+	background-color: #0073b4;
+}
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body style="width: 100%;">
+	<header th:fragment="header" style="width: 100%;">
+		<!-- 	<img style="width: 100%; height: 10%;" th:src="@{/images/libra2.jpg}" /> -->
+		<div class="common_head"
+			style="width: 100%; height: 50px; background-color: #0073b4; line-height: 50px; font-size: 14px;">
+			<!--   <nav >  -->
+			<a th:href="@{/}"
+				style="color: #ffffff; text-decoration: none; padding: 0px 15px 0px 15px; border-right: 1px solid #fff">首页</a>
+			<a th:href="@{/type/}"
+				style="color: #ffffff; text-decoration: none; padding: 0px 15px 0px 15px; border-right: 1px solid #fff">图书类别</a>
+			<a th:href="@{/book/}"
+				style="color: #ffffff; text-decoration: none; padding: 0px 15px 0px 15px;">图书信息</a>
+			<!--  </nav> -->
+			<a th:href="@{/book/order}"
+				style="color: #ff900c; text-decoration: none; padding: 0px 15px 0px 15px;float:right;">订单提醒</a>
+		    <a th:href="@{/book/search}"
+				style="color: #ffffff; text-decoration: none; padding: 0px 15px 0px 15px;float:right;">图书查询</a>
+		</div>
+	</header>
+
+	<footer th:fragment="footer">
+		<hr />
+		<p>&copy; CopyRight 西南科技大学 Spring Boot微框架 Web App开发组</p>
+	</footer>
+</body>
+</html>

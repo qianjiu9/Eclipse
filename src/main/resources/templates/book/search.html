@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>添加图书</title>
+<script th:src="@{/js/jquery-3.1.1.min.js}"></script>
+<style>
+body {
+	margin: 0px;
+	padding: 0px;
+}
+
+input {
+	height: 20px;
+	boeder: solid #fafafa 0.5px;
+	height-line: 20px;
+}
+
+p {
+	text-align: center;
+	letter-spacing: 3px;
+	font-size: 20px;
+	color: #1d96e8;
+}
+
+li{
+text-align:center;
+}
+</style>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+	<header th:replace="@{/common}::header"></header>
+
+	
+		<ul
+			style="border: solid 2px #d0dfef; border-radius: 5px; width: 80%; list-style: none; margin: auto;">
+			<br>
+			<li><span style="color:#3399ff;font-size:15px;" >请输入书本名称：</span> 
+			<input type="text"  name="name" id="book_name"> 
+			<input value="搜索" onclick="SearchByName()" style="height:25px;width: 40px;background-color:#3399ff;color:#fff;border-radius:5px;"> 
+	        </li>
+			<br>
+		</ul>
+	<br>
+	<div  th:fragment="booksTable">
+	<table id="book_list"  border="1" cellspacing='0'
+		style="text-align: center; width: 80%; margin: auto;">
+		<tr bgcolor=#f2f2f2>
+			<th>#</th>
+			<th>缩写</th>
+			<th>书名</th>
+			<th>作者</th>
+			<th>类别</th>
+			<th>余量</th>
+		</tr>
+
+		<tr  th:each="book,rowStat:${book}">
+		
+			<td th:text="${rowStat.count}">1</td>
+			<td th:text="${book.abbr}">1</td>
+			<td th:text="${book.name}">1</td>
+			<td th:text="${book.writ}">1</td>
+			<td th:text="${book.type?.name}">1</td>
+			<td th:text="${book.count}">1</td>
+		</tr>
+	</table></div>
+   <script>
+   function SearchByName(){
+	   var name = $("#book_list").load("SearchByName/"+$("#book_name").val());
+   }
+   function SearchByAuthor(){
+	   var author = $("#book_list").load("SearchByAuthor/"+$("#book_author").val())
+   }
+   </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>图书类别</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body style="margin: 0px; padding: 0px;">
+	<header th:replace="@{/common}::header"></header>
+	<div style="width: 80%; margin: auto;">
+		<p style="color: #b4cde6; text-align: center; font-size: 3em;">
+			<b>welcome to type's Page</b>
+		</p>
+
+		<div
+			style="border-radius: 5px; width: 100px; margin: auto; border: solid 2px #a4a5a7; text-align: center; background-color: #f2f2f2;">
+			<a th:href="@{/type/form}" style="text-decoration: none;">添加类别</a>
+		</div>
+		<br>
+		<table border="1" cellspacing='0'
+			style="text-align: center; width: 100%; margin: auto;">
+			<tr bgcolor=#f2f2f2>
+				<th>#</th>
+				<th>类别缩写</th>
+				<th>类别名称</th>
+				<th>类别描述</th>
+				<th>操作</th>
+			</tr>
+			<tr th:each="type,rowStat:${type}">
+				<td th:text="${rowStat.count}">1</td>
+				<td th:text="${type.abbr}">1</td>
+				<td th:text="${type.name}">1</td>
+				<td th:text="${type.desc}">1</td>
+				<td><a th:href="@{/type/delType(id=${type.id})}">删除</a> <a
+					th:href="@{/type/form(id=${type.id})}">修改</a></td>
+			</tr>
+		</table>
+	</div>
+	<footer></footer>
+</body>
+</html>
